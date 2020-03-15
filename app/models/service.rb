@@ -87,4 +87,11 @@ class Service < ActiveRecord::Base
   register_options_provider('37signals') do |omniauth|
     {user_id: omniauth['extra']['accounts'][0]['id'], name: omniauth['info']['name']}
   end
+
+  register_options_provider('google') do |omniauth|
+    {
+      email: omniauth['info']['email'],
+      name: "#{omniauth['info']['name']} <#{omniauth['info']['email']}>"
+    }
+  end
 end
